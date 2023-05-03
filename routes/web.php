@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Livewire\Users;
-use App\Http\Livewire\BuscadorUsers;
-use App\Http\Livewire\Department;
-
+use App\Http\Livewire\Inicio;
+use App\Http\Livewire\Edificios;
+use App\Http\Livewire\Servicios;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,16 +18,13 @@ use App\Http\Livewire\Department;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/inicio',Inicio::class);
+Route::get('/edificios',Edificios::class)->name('edificios');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/users', Users::class);
-    Route::get('/buscador', BuscadorUsers::class);
-    Route::get('/departamentos', Department::class);
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+   Route::get('/dashboard', inicio::class)->name('dashboard');
+   Route::get('/servicios', servicios::class)->name('servicios');
 });
